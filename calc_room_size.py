@@ -19,9 +19,7 @@ def ask_yes_no(query):
 
 # Get the wall size and convert it to a float
 def get_wall_size_normal(part):
-    wall_size = 0
-    wall_size = input(f"Please enter the {part} of the room: ")
-    wall_size = float(wall_size)
+    wall_size = float(input(f"Please enter the {part} of the room: "))
     return wall_size
 
 
@@ -37,9 +35,7 @@ def calc_room_size():
 
     # This is a special room that needs several calculations
     while room_is_special:
-        room_part_size = 0
-        room_part_size = get_wall_size_normal("length of the part") * get_wall_size_normal("width of the part")
-        room_size += room_part_size
+        room_size += get_wall_size_normal("length of the part") * get_wall_size_normal("width of the part")
 
         # Break the loop if no more parts are to be added to the room_size
         room_is_special = ask_yes_no("Do we need to add additional parts? ")
@@ -50,16 +46,15 @@ def calc_room_size():
 
 
 # Here the actual processing starts
-room_counter_max = input("Please input how many rooms you would like to measure! ")
-room_counter_max = int(room_counter_max)
+room_counter_max = int(input("Please input how many rooms you would like to measure! "))
 rooms_measured = 1
 print(f"Starting the calculation with room {rooms_measured}.")
 
 # Calculate the room sizes until all rooms are done
 while rooms_measured <= room_counter_max:
     calc_room_size()
+    print(f"Done with room {rooms_measured}. Continuing with the next one.")
     rooms_measured += 1
-    print(f"Done with room {rooms_measured - 1}. Continuing with the next one.")
 
 # Loop through the dictionary to calculate the total size
 total_room_size = sum([room for room in all_rooms.values()])
