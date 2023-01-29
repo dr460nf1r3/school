@@ -59,9 +59,7 @@ while rooms_measured <= room_counter_max:
 # Loop through the dictionary to calculate the total size
 total_room_size = sum([room for room in all_rooms.values()])
 
-print(
-    ""
-    f"These are all registered rooms:\n"
-    f"{all_rooms}\n"
-    f"The total size is {total_room_size}!"
-)
+print(""
+      f"These are all registered rooms:\n"
+      f"{all_rooms}\n"
+      f"The total size is {total_room_size}!")
