@@ -1,3 +1,6 @@
+# Needed to calculate the circle size
+import math
+
 # Define our global variables & the dictionary holding our room name & sizes
 all_rooms = {}
 
@@ -21,12 +24,14 @@ def get_room_type():
     normal_room_choices = ['normal', '1', '1.']
     special_room_choices = ['special', '2', '2.']
     roof_room_choices = ['roof', '3', '3.']
+    circle_room_choices = ['circle', '4', '4.']
 
     while True:
         user_input = input("What kind of room are we going to calculate the size for?\n"
-                           "1. a normal room\n"
-                           "2. a room with multiple square parts\n"
-                           "3. a room with roof tiles\n"
+                           "1. A normal room\n"
+                           "2. A room with multiple square parts\n"
+                           "3. A room with roof tiles\n"
+                           "4. A room which is a circle\n"
                            "Enter the number or type of the room: ")
 
         if user_input.lower() in normal_room_choices:
@@ -35,6 +40,8 @@ def get_room_type():
             return "special"
         elif user_input.lower() in roof_room_choices:
             return "roof"
+        elif user_input.lower() in circle_room_choices:
+            return "circle"
         else:
             print('This is not a valid answer! Try again.')
 
@@ -45,7 +52,7 @@ def get_wall_size_normal(part):
     return wall_size
 
 
-# Calculate the actual room size
+# Calculate the actual room size depending on the room type
 def calc_room_size():
     room_size = 0
     room_name = input("What is the name of this room? ")
@@ -65,6 +72,8 @@ def calc_room_size():
     elif room_type == "roof":
         # This has a roof tile that needs to be calculated differently
         room_size = (get_wall_size_normal("length") * get_wall_size_normal("width")) / 2
+    elif room_type == "circle":
+        room_size = math.pow(float(input("Please enter the radius of the room: ")), 2) * math.pi
 
     # Add the total room size to our dictionary
     all_rooms[room_name] = room_size
@@ -86,6 +95,7 @@ while rooms_measured <= room_counter_max:
 # Loop through the dictionary to calculate the total size
 total_room_size = sum([room for room in all_rooms.values()])
 
+# Our final output showing total size and all room stats
 print(f"\nThese are all registered rooms:\n"
       f"{all_rooms}\n"
       f"The average room size is {total_room_size / room_counter_max}.\n"
