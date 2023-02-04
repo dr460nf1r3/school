@@ -1,9 +1,5 @@
 # Initialize application
-import math
 from functions import *
-
-# Define our global variables & the dictionary holding our room name & sizes
-all_rooms = {}
 
 # Here the actual processing starts
 room_counter_max = int(input("Please input how many rooms you would like to measure! "))

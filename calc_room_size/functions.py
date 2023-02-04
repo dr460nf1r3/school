@@ -1,5 +1,8 @@
+# To do circle calculations
 import math
-from main import all_rooms
+
+# Initialize our dictionary
+all_rooms = {}
 
 
 # We need to ask for this multiple times, therefore we make it a function
@@ -23,6 +26,7 @@ def get_room_type():
     special_room_choices = ['special', '2', '2.']
     roof_room_choices = ['roof', '3', '3.']
     circle_room_choices = ['circle', '4', '4.']
+    segment_room_choices = ['segment', '5', '5.']
 
     while True:
         user_input = input("What kind of room are we going to calculate the size for?\n"
@@ -30,6 +34,7 @@ def get_room_type():
                            "2. A room with multiple square parts\n"
                            "3. A room with roof tiles\n"
                            "4. A room which is a circle\n"
+                           "5. A room which is a circle segment\n"
                            "Enter the number or type of the room: ")
 
         if user_input.lower() in normal_room_choices:
@@ -40,6 +45,8 @@ def get_room_type():
             return "roof"
         elif user_input.lower() in circle_room_choices:
             return "circle"
+        elif user_input.lower() in segment_room_choices:
+            return "segment"
         else:
             print('This is not a valid answer! Try again.')
 
@@ -58,20 +65,31 @@ def calc_room_size():
 
     if room_type == "normal":
         # This is a normal room
-        room_size += get_wall_size_normal("length") * get_wall_size_normal("width")
+        room_size += get_wall_size_normal("length") * \
+            get_wall_size_normal("width")
     elif room_type == "special":
         # This is a special room that needs several calculations
         lets_loop_wall_size = True
         while lets_loop_wall_size:
-            room_size += get_wall_size_normal("length of the part") * get_wall_size_normal("width of the part")
+            room_size += get_wall_size_normal("length of the part") * \
+                get_wall_size_normal("width of the part")
             # Break the loop if no more parts are to be added to the room_size
             if not ask_yes_no("Do we need to add additional parts? "):
                 lets_loop_wall_size = False
     elif room_type == "roof":
         # This has a roof tile that needs to be calculated differently
-        room_size = (get_wall_size_normal("length") * get_wall_size_normal("width")) / 2
+        room_size = (get_wall_size_normal("length") *
+                     get_wall_size_normal("width")) / 2
     elif room_type == "circle":
-        room_size = math.pow(float(input("Please enter the radius of the room: ")), 2) * math.pi
+        room_size = round(
+            (math.pow(float(input("Please enter the radius of the room: ")), 2) * math.pi), 2)
+    elif room_type == "segment":
+        segment_radius = float(
+            input(f"Please enter the radius of the segment: "))
+        segment_angle = float(
+            input(f"Please enter the angle of the segment: "))
+        room_size = (math.pi * (segment_radius * segment_radius) * (segment_angle / 360)) - (
+            1 / 2 * (segment_radius * segment_radius) * math.sin((segment_angle * math.pi) / 180))
 
     # Add the total room size to our dictionary
     all_rooms[room_name] = room_size
