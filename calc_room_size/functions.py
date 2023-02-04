@@ -1,8 +1,5 @@
-# Needed to calculate the circle size
 import math
-
-# Define our global variables & the dictionary holding our room name & sizes
-all_rooms = {}
+from main import all_rooms
 
 
 # We need to ask for this multiple times, therefore we make it a function
@@ -20,6 +17,7 @@ def ask_yes_no(query):
             print('Only yes or no are valid answers! Try again.')
 
 
+# Ask what type of room is being measured
 def get_room_type():
     normal_room_choices = ['normal', '1', '1.']
     special_room_choices = ['special', '2', '2.']
@@ -78,25 +76,3 @@ def calc_room_size():
     # Add the total room size to our dictionary
     all_rooms[room_name] = room_size
     print(f"This room is {all_rooms[room_name]} qm")
-
-
-# Here the actual processing starts
-room_counter_max = int(input("Please input how many rooms you would like to measure! "))
-rooms_measured = 1
-print(f"Starting the calculation with room {rooms_measured}.")
-
-# Calculate the room sizes until all rooms are done
-while rooms_measured <= room_counter_max:
-    calc_room_size()
-    if (rooms_measured + 1) <= room_counter_max:
-        print(f"Done with room {rooms_measured}. Continuing with the next one.\n")
-    rooms_measured += 1
-
-# Loop through the dictionary to calculate the total size
-total_room_size = sum([room for room in all_rooms.values()])
-
-# Our final output showing total size and all room stats
-print(f"\nThese are all registered rooms:\n"
-      f"{all_rooms}\n"
-      f"The average room size is {total_room_size / room_counter_max}.\n"
-      f"The total size is {total_room_size}!")
