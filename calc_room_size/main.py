@@ -1,4 +1,6 @@
 # Initialize application
+from datetime import datetime
+
 from functions import *
 
 # Here the actual processing starts
@@ -12,12 +14,27 @@ while rooms_measured <= room_counter_max:
     rooms_measured += 1
     if rooms_measured <= room_counter_max:
         print(f"Done with room {rooms_measured}. Continuing with the next one.\n")
-
+    else:
+        print(f"Finished calculating room sizes.\n")
 # Loop through the dictionary to calculate the total size
-total_room_size = sum([room for room in all_rooms.values()])
+total_room_size = round(sum([room for room in all_rooms.values()]), 2)
 
 # Our final output showing total size and all room stats
-print(f"\nThese are all registered rooms:\n"
+average_room_size = round(total_room_size / room_counter_max, 2)
+print(f"These are all registered rooms:\n"
       f"{all_rooms}\n"
-      f"The average room size is {total_room_size / room_counter_max}.\n"
-      f"The total size is {total_room_size}!")
+      f"Average room size: {average_room_size}.\n"
+      f"Total room size  : {total_room_size}.\n")
+
+# Offer saving the result to a file
+if ask_yes_no("Do you want to save the result to a file? "):
+    now = datetime.now()
+    current_time = now.strftime("%m/%d/%Y, %H:%M:")
+    f = open(str(input("Please enter the file path: ")), "a")
+    f.write(f"Room calculation results from {current_time}\n"
+            f"These are all registered rooms:\n"
+            f"{all_rooms}\n"
+            f"Average room size: {average_room_size}\n"
+            f"Total room size  : {total_room_size}\n\n")
+    f.close()
+    print("Done! ✅")
