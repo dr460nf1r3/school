@@ -2,19 +2,19 @@
 # Initialize application
 from datetime import datetime
 
-from functions import ask_yes_no, calc_room_size, all_rooms
+from functions import ask_yes_no, calc_room_size, all_rooms  # pylint disable=invalid-import
 
 # Here the actual processing starts
 room_counter_max = int(input("Please input how many rooms you would like to measure! "))
-ROOMS_MEASURED = 1
-print(f"Starting the calculation with room {ROOMS_MEASURED}.")
+rooms_measured = 1  # pylint: disable=invalid-name
+print(f"Starting the calculation with room {rooms_measured}.")
 
 # Calculate the room sizes until all rooms are done
-while ROOMS_MEASURED <= room_counter_max:
+while rooms_measured <= room_counter_max:
     calc_room_size()
-    ROOMS_MEASURED += 1
-    if ROOMS_MEASURED <= room_counter_max:
-        print(f"Done with room {ROOMS_MEASURED}. Continuing with the next one.\n")
+    rooms_measured += 1
+    if rooms_measured <= room_counter_max:
+        print(f"Done with room {rooms_measured}. Continuing with the next one.\n")
     else:
         print("Finished calculating room sizes.\n")
 
