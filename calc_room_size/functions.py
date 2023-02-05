@@ -68,7 +68,7 @@ def calc_room_size():
         # This is a normal room
         room_size += get_wall_size_normal("length") * \
                      get_wall_size_normal("width")
-    elif room_type == "special":
+    if room_type == "special":
         # This is a special room that needs several calculations
         while True:
             room_size += get_wall_size_normal("length of the part") * \
@@ -76,14 +76,14 @@ def calc_room_size():
             # Break the loop if no more parts are to be added to the room_size
             if not ask_yes_no("Do we need to add additional parts? "):
                 break
-    elif room_type == "roof":
+    if room_type == "roof":
         # This has a roof tile that needs to be calculated differently
         room_size = (get_wall_size_normal("length") *
                      get_wall_size_normal("width")) / 2
-    elif room_type == "circle":
+    if room_type == "circle":
         room_size = round(
             (math.pow(float(input("Please enter the radius of the room: ")), 2) * math.pi), 2)
-    elif room_type == "segment":
+    if room_type == "segment":
         segment_radius = float(
             input("Please enter the radius of the segment: "))
         segment_angle = float(

@@ -2,7 +2,7 @@
 # Initialize application
 from datetime import datetime
 
-from functions import ask_yes_no, calc_room_size, all_rooms  # pylint disable=invalid-import
+from functions import all_rooms, ask_yes_no, calc_room_size  # pylint disable=invalid-import
 
 # Here the actual processing starts
 room_counter_max = int(input("Please input how many rooms you would like to measure! "))
