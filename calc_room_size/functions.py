@@ -1,6 +1,4 @@
 """This module contains all the necessary functions to do our calculations."""
-
-# To do circle calculations
 import math
 
 # Initialize our dictionary
@@ -51,10 +49,17 @@ def get_room_type():
         print('This is not a valid answer! Try again.')
 
 
-# Get the wall size and convert it to a float
+# Get the wall size and convert it to a float, retry if input is invalid
 def get_wall_size_normal(part):
     """Input the wall size and return the floated value"""
-    wall_size = float(input(f"Please enter the {part} of the room: "))
+    wall_size = 0
+    while True:
+        try:
+            wall_size = float(input(f"Please enter the {part} of the room: "))
+            break
+        except ValueError:  # pylint disable=unused_variable
+            print("That is not a valid size, try again..")
+            continue
     return wall_size
 
 
