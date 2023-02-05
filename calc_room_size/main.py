@@ -41,14 +41,14 @@ def save_result_to_file():
     """Saves the complete result to a file."""
     now = datetime.now()
     current_time = now.strftime("%m/%d/%Y, %H:%M:")
-    with open(str(input("Please enter the file path: ")), "a", encoding="UTF-8") as f:
-        f.write(f"Room calculation results from {current_time}\n"
-                "These are all registered rooms:\n"
-                f"{all_rooms}\n"
-                f"Average room size: {average_room_size}\n"
-                f"Total room size  : {total_room_size}\n"
-                f"Estimated rent   : {house_rent_price} €\n\n")
-    f.close()
+    with open(str(input("Please enter the file path: ")), "a", encoding="UTF-8") as current_file:
+        current_file.write(f"Room calculation results from {current_time}\n"
+                           "These are all registered rooms:\n"
+                           f"{all_rooms}\n"
+                           f"Average room size: {average_room_size}\n"
+                           f"Total room size  : {total_room_size}\n"
+                           f"Estimated rent   : {house_rent_price} €\n\n")
+    current_file.close()
 
 
 if ask_yes_no("Do you want to save the result to a file? "):
