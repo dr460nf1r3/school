@@ -21,11 +21,11 @@ def ask_yes_no(query):
 
 def get_room_type():
     """Get the type of room that is being measured."""
-    normal_room_choices = ["normal", "1", "1."]
-    special_room_choices = ["special", "2", "2."]
-    roof_room_choices = ["roof", "3", "3."]
-    circle_room_choices = ["circle", "4", "4."]
-    segment_room_choices = ["segment", "5", "5."]
+    normal_room_choices = ["1", "1."]
+    special_room_choices = ["2", "2."]
+    roof_room_choices = ["3", "3."]
+    circle_room_choices = ["4", "4."]
+    segment_room_choices = ["5", "5."]
 
     while True:
         user_input = input("What kind of room are we going to calculate the size for?\n"
@@ -55,7 +55,7 @@ def get_wall_size_normal(part):
     wall_size = 0
     while True:
         try:
-            wall_size = float(input(f"Please enter the {part} of the room: "))
+            wall_size = float(input(f"Please enter the {part} of the room in meters: "))
             break
         except ValueError:  # pylint disable=unused_variable
             print("That is not a valid size, try again..")
@@ -87,10 +87,10 @@ def calc_room_size():
                      get_wall_size_normal("width")) / 2
     if room_type == "circle":
         room_size = round(
-            (math.pow(float(input("Please enter the radius of the room: ")), 2) * math.pi), 2)
+            (math.pow(float(input("Please enter the radius of the room in meters: ")), 2) * math.pi), 2)
     if room_type == "segment":
         segment_radius = float(
-            input("Please enter the radius of the segment: "))
+            input("Please enter the radius of the segment in meters: "))
         segment_angle = float(
             input("Please enter the angle of the segment: "))
         room_size = (math.pi * (segment_radius * segment_radius) *
@@ -99,4 +99,4 @@ def calc_room_size():
 
     # Add the total room size to our dictionary
     all_rooms[room_name] = room_size
-    print(f"This room is {all_rooms[room_name]} qm")
+    print(f"This room is {all_rooms[room_name]} m²")
