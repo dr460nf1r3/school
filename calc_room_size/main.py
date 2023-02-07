@@ -4,13 +4,23 @@ from datetime import datetime
 # Initialize application
 from functions import all_rooms, ask_yes_no, calc_room_size
 
-# Here the actual processing starts
-try:
-    ROOM_COUNTER_MAX = int(input("Please input how many rooms you would like to measure! "))
-except ValueError:
-    print("This is not a valid number, assuming 1..")
-    ROOM_COUNTER_MAX = 1
-rooms_measured = 1  # pylint: disable=invalid-name
+# Get the amount of rooms to be dealt with. Also, we need to catch wrong input as exception.
+ROOM_COUNTER_MAX = 0
+while True:
+    try:
+        ROOM_COUNTER_MAX = int(input("Please input how many rooms you would like to measure! "))
+        if ROOM_COUNTER_MAX < 1:
+            print("Are you sure about that? Select a number greater than 0!")
+            continue
+        if ROOM_COUNTER_MAX >= 1000:
+            print("You crazy motherfucker, alright.")
+        break
+    except ValueError:
+        print("This is not a valid number..")
+        continue
+
+# Starting the calculation with room 1
+rooms_measured = 1  # pylint: disable=invalid-name - this is actually not a constant as it changes value
 print(f"Starting the calculation with room {rooms_measured}.")
 
 # Calculate the room sizes until all rooms are done
@@ -27,12 +37,12 @@ total_room_size = round(sum(list(all_rooms.values())), 2)
 
 # Our final output showing total size and all room stats
 average_room_size = round(total_room_size / ROOM_COUNTER_MAX, 2)
-house_rent_price = total_room_size * float(input("What is the average rent for one qm? "))
+house_rent_price = total_room_size * float(input("What is the average rent in € for one m²? "))
 
 print("These are all registered rooms:\n"
       f"{all_rooms}\n"
-      f"Average room size: {average_room_size}.\n"
-      f"Total room size  : {total_room_size}.\n"
+      f"Average room size: {average_room_size} m²\n"
+      f"Total room size  : {total_room_size} m²\n"
       f"Estimated rent   : {house_rent_price} €\n")
 
 
@@ -45,8 +55,8 @@ def save_result_to_file():
         current_file.write(f"Room calculation results from {current_time}\n"
                            "These are all registered rooms:\n"
                            f"{all_rooms}\n"
-                           f"Average room size: {average_room_size}\n"
-                           f"Total room size  : {total_room_size}\n"
+                           f"Average room size: {average_room_size} m²\n"
+                           f"Total room size  : {total_room_size} m²\n"
                            f"Estimated rent   : {house_rent_price} €\n\n")
     current_file.close()
 
@@ -56,7 +66,7 @@ if ask_yes_no("Do you want to save the result to a file? "):
         try:
             save_result_to_file()
             break
-        except IOError as e:
+        except IOError:
             print("That is not a valid file path, try again..")
             continue
 
