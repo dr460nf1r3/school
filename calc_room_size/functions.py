@@ -87,7 +87,8 @@ def calc_room_size():
                      get_wall_size_normal("width")) / 2
     if room_type == "circle":
         room_size = round(
-            (math.pow(float(input("Please enter the radius of the room in meters: ")), 2) * math.pi), 2)
+            (math.pow(float(input("Please enter the radius of the room in meters: ")), 2)
+             * math.pi), 2)
     if room_type == "segment":
         segment_radius = float(
             input("Please enter the radius of the segment in meters: "))

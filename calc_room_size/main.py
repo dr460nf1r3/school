@@ -20,7 +20,7 @@ while True:
         continue
 
 # Starting the calculation with room 1
-rooms_measured = 1  # pylint: disable=invalid-name - this is actually not a constant as it changes value
+rooms_measured = 1  # pylint: disable=invalid-name
 print(f"Starting the calculation with room {rooms_measured}.")
 
 # Calculate the room sizes until all rooms are done
