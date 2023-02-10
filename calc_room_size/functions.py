@@ -1,32 +1,24 @@
 """This module contains all the necessary functions to do our calculations."""
 import math
 
-# Initialize our dictionary
+# Initialize our dictionaries
 all_rooms = {}
+choices = {"normal": "1", "special": "2", "roof": "3", "circle": "4", "segment": "5"}
+yn_choices = {"yes": True, "no": False, "n": False, "y": True, "ja": True, "nein": False}
 
 
 def ask_yes_no(query):
     """Ask a simple yes/no question and return True/False."""
-    yes_choices = ["yes", "y", "j", "ja"]
-    no_choices = ["no", "n", "nein"]
-
     while True:
-        user_input = input(query)
-        if user_input.lower() in yes_choices:
-            return True
-        if user_input.lower() in no_choices:
-            return False
+        answer = input(query).lower()
+        for i in yn_choices:
+            if answer == i:
+                return yn_choices.get(i)
         print("Only yes or no are valid answers! Try again.")
 
 
 def get_room_type():
     """Get the type of room that is being measured."""
-    normal_room_choices = ["1", "1."]
-    special_room_choices = ["2", "2."]
-    roof_room_choices = ["3", "3."]
-    circle_room_choices = ["4", "4."]
-    segment_room_choices = ["5", "5."]
-
     while True:
         user_input = input("What kind of room are we going to calculate the size for?\n"
                            "1. A normal room\n"
@@ -34,19 +26,13 @@ def get_room_type():
                            "3. A room with roof tiles\n"
                            "4. A room which is a circle\n"
                            "5. A room which is a circle segment\n"
-                           "Enter the number or type of the room: ")
+                           "Enter the number of the room type: ")
 
-        if user_input.lower() in normal_room_choices:
-            return "normal"
-        if user_input.lower() in special_room_choices:
-            return "special"
-        if user_input.lower() in roof_room_choices:
-            return "roof"
-        if user_input.lower() in circle_room_choices:
-            return "circle"
-        if user_input.lower() in segment_room_choices:
-            return "segment"
-        print('This is not a valid answer! Try again.')
+        # Here we loop through the different types of choices and compare the user
+        # input to its comprehensions
+        for i in choices:
+            if choices.get(i) == user_input:
+                return i
 
 
 # Get the wall size and convert it to a float, retry if input is invalid
@@ -86,10 +72,12 @@ def calc_room_size():
         room_size = (get_wall_size_normal("length") *
                      get_wall_size_normal("width")) / 2
     if room_type == "circle":
+        # Calculates a plain circle room
         room_size = round(
             (math.pow(float(input("Please enter the radius of the room in meters: ")), 2)
              * math.pi), 2)
     if room_type == "segment":
+        # This is a circle segment which is being calculated
         segment_radius = float(
             input("Please enter the radius of the segment in meters: "))
         segment_angle = float(
