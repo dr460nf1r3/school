@@ -24,3 +24,7 @@ jobs:
     - name: Analysing the code for security issues with bandit
       run: |
         bandit $(git ls-files '*.py')
+    - name: Run unit tests
+      run: |
+        python $(git ls-files 'test.py')
+

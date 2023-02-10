@@ -69,6 +69,7 @@ def calc_room_size():
                 break
     if room_type == "roof":
         # This has a roof tile that needs to be calculated differently
+        # ... actually this is just a 45° cut-off part of a regular room
         room_size = (get_wall_size_normal("length") *
                      get_wall_size_normal("width")) / 2
     if room_type == "circle":
