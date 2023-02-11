@@ -18,13 +18,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pylint bandit
+    - name: Run unit tests
+      run: |
+        python calc_room_size/test_main.py
     - name: Analysing the code for coding issues with pylint
       run: |
         pylint $(git ls-files '*.py')
     - name: Analysing the code for security issues with bandit
       run: |
-        bandit $(git ls-files '*.py')
-    - name: Run unit tests
-      run: |
-        python $(git ls-files 'test.py')
+        bandit -c bandit.yaml $(git ls-files '*.py')
+
 
