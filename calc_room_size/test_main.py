@@ -49,6 +49,7 @@ class TestFunctions(unittest.TestCase):
                 return 10
             if "width" in prompt:
                 return 10
+            return False
 
         output = StringIO()  # Create StringIO object
         sys.stdout = output  # and redirect stdout.
