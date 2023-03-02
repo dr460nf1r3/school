@@ -5,3 +5,4 @@ That's the stuff that I'm required to complete for school. Also my first ever Py
 
 
 - Room size calculator: a simple CLI application doing calculations on room sizes in m². The introduction to basic programming terms.
+- Population calculator: another simple script which calculates the population value of R2D2 units.
