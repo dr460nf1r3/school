@@ -2,7 +2,7 @@
 from datetime import datetime
 
 # Initialize application
-from functions import all_rooms, ask_yes_no, calc_room_size
+from functions import all_rooms, ask_yes_no, calc_room_size, bubblesort
 
 # Get the amount of rooms to be dealt with. Also, we need to catch wrong input as exception.
 ROOM_COUNTER_MAX = 0
@@ -45,6 +45,19 @@ print("These are all registered rooms:\n"
       f"Total room size  : {total_room_size} m²\n"
       f"Estimated rent   : {house_rent_price} €\n")
 
+
+# Sort our dictionary by the room size
+dict(sorted(all_rooms.items(), key=lambda item: item[1]))
+
+# Print our now sorted dictionary
+print(all_rooms)
+
+# Implement a bubble sort algorithm to sort room sizes
+room_list = list(all_rooms.values())
+rooms_sorted = bubblesort(room_list)
+
+# Print the sorted list
+print(rooms_sorted)
 
 # Offer saving the result to a file
 def save_result_to_file():

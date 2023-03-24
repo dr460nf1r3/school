@@ -90,3 +90,14 @@ def calc_room_size():
     # Add the total room size to our dictionary
     all_rooms[room_name] = room_size
     print(f"This room is {all_rooms[room_name]} m²")
+
+def bubblesort(list):
+    """This is a simple bubble sort algorithm"""
+    n = len(list)
+    for j in range(n-1):
+        for i in range(n-1):
+            if list[i] > list[i+1]:
+                temp = list[i]
+                list[i] = list[i+1]
+                list[i+1] = temp
+    return list
