@@ -59,5 +59,5 @@ class TestFunctions(unittest.TestCase):
         assert "This room is 100.0 m²" in output.getvalue()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

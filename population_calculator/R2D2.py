@@ -17,14 +17,14 @@ def print_population(young, mature, old_fuck):
 
 
 # Set start values
-YEAR = 4000
+year = 4000
 END_YEAR = 4100
 number_young = 10
 number_mature = 10
 number_old_fuck = 10
 
-while YEAR <= END_YEAR:
-    print("Calculating population of year " + str(YEAR) + ".")
+while year <= END_YEAR:
+    print("Calculating population of year " + str(year) + ".")
 
     # Save the returned new population into a tuple
     advanced = advance_population(number_young, number_mature, number_old_fuck)

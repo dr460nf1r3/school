@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Initial variable
-i = 1 
+i = 1
 
 # Do this while i is less than or equal to 100
 while i <= 100:

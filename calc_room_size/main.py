@@ -4,11 +4,14 @@ from datetime import datetime
 # Initialize application
 from functions import all_rooms, ask_yes_no, calc_room_size, bubblesort
 
-# Get the amount of rooms to be dealt with. Also, we need to catch wrong input as exception.
+# Get the amount of rooms to be dealt with. Also, we need to catch wrong
+# input as exception.
 ROOM_COUNTER_MAX = 0
 while True:
     try:
-        ROOM_COUNTER_MAX = int(input("Please input how many rooms you would like to measure! "))
+        ROOM_COUNTER_MAX = int(
+            input("Please input how many rooms you would like to measure! ")
+        )
         if ROOM_COUNTER_MAX < 1:
             print("Are you sure about that? Select a number greater than 0!")
             continue
@@ -37,13 +40,17 @@ total_room_size = round(sum(list(all_rooms.values())), 2)
 
 # Our final output showing total size and all room stats
 average_room_size = round(total_room_size / ROOM_COUNTER_MAX, 2)
-house_rent_price = total_room_size * float(input("What is the average rent in € for one m²? "))
+house_rent_price = total_room_size * float(
+    input("What is the average rent in € for one m²? ")
+)
 
-print("These are all registered rooms:\n"
-      f"{all_rooms}\n"
-      f"Average room size: {average_room_size} m²\n"
-      f"Total room size  : {total_room_size} m²\n"
-      f"Estimated rent   : {house_rent_price} €\n")
+print(
+    "These are all registered rooms:\n"
+    f"{all_rooms}\n"
+    f"Average room size: {average_room_size} m²\n"
+    f"Total room size  : {total_room_size} m²\n"
+    f"Estimated rent   : {house_rent_price} €\n"
+)
 
 
 # Sort our dictionary by the room size
@@ -59,18 +66,23 @@ rooms_sorted = bubblesort(room_list)
 # Print the sorted list
 print(rooms_sorted)
 
+
 # Offer saving the result to a file
 def save_result_to_file():
     """Saves the complete result to a file."""
     now = datetime.now()
     current_time = now.strftime("%m/%d/%Y, %H:%M:")
-    with open(str(input("Please enter the file path: ")), "a", encoding="UTF-8") as current_file:
-        current_file.write(f"Room calculation results from {current_time}\n"
-                           "These are all registered rooms:\n"
-                           f"{all_rooms}\n"
-                           f"Average room size: {average_room_size} m²\n"
-                           f"Total room size  : {total_room_size} m²\n"
-                           f"Estimated rent   : {house_rent_price} €\n\n")
+    with open(
+        str(input("Please enter the file path: ")), "a", encoding="UTF-8"
+    ) as current_file:
+        current_file.write(
+            f"Room calculation results from {current_time}\n"
+            "These are all registered rooms:\n"
+            f"{all_rooms}\n"
+            f"Average room size: {average_room_size} m²\n"
+            f"Total room size  : {total_room_size} m²\n"
+            f"Estimated rent   : {house_rent_price} €\n\n"
+        )
     current_file.close()
 
 
